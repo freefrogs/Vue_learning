@@ -1,11 +1,16 @@
 <template>
-  <h1>Hello world</h1>
+  <div class="container">
+    <Header title="Task Traker"/>
+  </div>
 </template>
 
 <script>
+import Header from './components/Header'
+
 export default {
   name: 'App',
   components: {
+    Header,
   }
 }
 </script>
