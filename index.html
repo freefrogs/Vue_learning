@@ -5,11 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vue.js</title>
   <script src="https://unpkg.com/vue@3.0.2"></script>
+  <style>
+    .box {
+      padding: 100px 0;
+      width: 400px;
+      background-color: crimson;
+      text-align: center;
+      margin: 20px;
+      display: inline-block;
+    }
+    .best {
+      background-color: pink;
+    }
+    .book {
+      width: 300px;
+      min-height: 200px;
+      height: auto;
+      margin: 20px;
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
-    <h1>Title: {{ title }}</h1>
-    <h2>Author: {{ author }} ({{ age }})</h2>
+    <h1>Title: {{ books[0].title }}</h1>
+    <h2>Author: {{ books[0].author }} ({{ books[0].age }})</h2>
     <button v-on:click="increaseAge">increase age</button>
     <button @click="decreaseAge">decrease age</button>
     <div @mouseover="changeText">
@@ -23,6 +43,31 @@
       <div v-else style="background-color: orange; height: 10px;"></div>
     </div>
     <button @click="hideDiv">{{ msg }}</button>
+
+    <br />
+    <br />
+    <div class="box" @mousemove="fourthEvent">mouse move: {{ x }}, {{ y }}</div>
+    <br />
+    <br />
+    <h2>Books list</h2>
+    <ul>
+      <li v-for="b in books" class="book" :class="{ best: b.best }" @dblclick="changeBest(b.id)">
+        <img :src="b.img" :alt="b.title">
+        <h3>{{ b.title }}</h3>
+        <p>author: {{ b.author }} ({{ b.age }})</p>
+      </li>
+    </ul>
+    
+    <h2>Best Books</h2>
+    <ul>
+      <li v-for="b in filteredBooks">
+        <h3>{{ b.title }}</h3>
+      </li>
+    </ul>
+    <br />
+    <br />
+    <a v-bind:href="url" target="_blank">link1</a><br />
+    <a :href="url" target="_blank">link2</a>
   </div>
 
   <script src="app.js"></script>
