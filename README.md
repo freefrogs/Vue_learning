@@ -5,6 +5,7 @@ Learning Vue in 2021
 ### Branches:
 * crashCourse1 - Vue.js basic with Traversy, aplication base on cdn -> random user generator
 * crashCourse2 - more complicated project with Traversy with Vue CLI and router -> task tracker app
+* NinjaBasics - Vue.js practice with Net Ninja base on cdn -> events handlers, v-if, v-show, v-for, computed data
 
 ### Base on:
 * Vue guide [v2](https://vuejs.org/v2/guide/) & [v3](https://v3.vuejs.org/guide/introduction.html)
