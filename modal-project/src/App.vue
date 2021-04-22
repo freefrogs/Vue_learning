@@ -2,7 +2,7 @@
   <h1>{{ title }}</h1>
   <input type="text" ref="name">
   <button @click="handleClick">click me</button>
-  <div v-if="showModal">
+  <teleport to=".modals" v-if="showModal">
     <Modal theme="sale" @close="toggleModal(1)">
       <template v-slot:links>
         <a href="#">watch intro</a>
@@ -11,8 +11,8 @@
       <h2>{{ header }}</h2>
       <p>{{ content }}</p>
     </Modal>
-  </div>
-  <div v-if="showModal2">
+  </teleport>
+  <teleport to=".modals" v-if="showModal2">
     <Modal @close="toggleModal(2)">
       <template v-slot:links>
         <a href="#">read more</a>
@@ -20,7 +20,7 @@
       <h2>About us</h2>
       <p>We are awesome</p>
     </Modal>
-  </div>
+  </teleport>
   <br>
   <br>
   <button @click="toggleModal(1)">Open modal</button>

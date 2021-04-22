@@ -1,6 +1,8 @@
-#app {
+body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
+}
+#app {
   margin-top: 60px;
 }
 .active {
