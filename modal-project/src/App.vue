@@ -3,7 +3,7 @@
   <input type="text" ref="name">
   <button @click="handleClick">click me</button>
   <div v-if="showModal">
-    <Modal theme="sale" @close="toggleModal">
+    <Modal theme="sale" @close="toggleModal(1)">
       <template v-slot:links>
         <a href="#">watch intro</a>
         <a href="#">read more</a>
@@ -12,9 +12,21 @@
       <p>{{ content }}</p>
     </Modal>
   </div>
+  <div v-if="showModal2">
+    <Modal @close="toggleModal(2)">
+      <template v-slot:links>
+        <a href="#">read more</a>
+      </template>
+      <h2>About us</h2>
+      <p>We are awesome</p>
+    </Modal>
+  </div>
   <br>
   <br>
-  <button @click="toggleModal">Open modal</button>
+  <button @click="toggleModal(1)">Open modal</button>
+  <br>
+  <br>
+  <button @click="toggleModal(2)">Open modal2</button>
 </template>
 
 <script>
@@ -30,15 +42,21 @@ export default {
       title: 'Hello world',
       header: 'Sign up!',
       content: 'bla, bla, bla',
-      showModal: false
+      showModal: false,
+      showModal2: false,
     }
   },
   methods: {
     handleClick() {
       this.$refs.name.classList.toggle('active')
     },
-    toggleModal() {
-      this.showModal = !this.showModal
+    toggleModal(modal) {
+      if (modal === 1) {
+        this.showModal = !this.showModal
+      } else {
+        this.showModal2 = !this.showModal2
+      }
+      
     }
   }
 }
