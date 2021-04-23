@@ -4,9 +4,36 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mastery Vue socks</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <div class="navbar">
+      <h1>New Shop</h1>
+    </div>
+    <div class="product">
+      <div class="product_img">
+        <img :src="image" :alt="product">
+      </div>
+      <div class="product_info">
+        <h2>{{ title }}</h2>
+        <p v-if="inStock >= 10">In stock</p>
+        <p v-else-if="inStock > 0 && inStock < 10">Almost sold out!</p>
+        <p v-else>Out of stock</p>
+        <ul>
+          <li v-for="d in details">{{ d }}</li>
+        </ul>
+        <div>
+          <div v-for="k in kinds" class="type" :class="k.color" @click="changeImage(k)"></div>
+        </div>
+        <div class="cart">
+          <button @click="addToCart" :class="{disabled_button: inStock <= 0}" :disabled="inStock <= 0">Add to cart</button>
+          <button @click="deleteFromCart" :class="{disabled_button: inStock <= 0}">Delete from cart</button>
+          <p class="cart_count">Products in cart: {{ cart }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
   <script src="main.js"></script>
