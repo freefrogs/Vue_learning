@@ -100,8 +100,7 @@ const app = new Vue({
         this.productsList = [...this.productsList, newProduct]
       } else {
         if (z === 0) {
-          console.log('hi')
-          this.productsList = [...this.productsList.slice(check+1, 1)]
+          this.productsList = [...this.productsList.filter(item => item !== this.productsList[check])]
           return
         }
         this.productsList[check].cart = z
