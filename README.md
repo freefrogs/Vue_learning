@@ -12,3 +12,4 @@ Learning Vue in 2021
 * Vue guide [v2](https://vuejs.org/v2/guide/) & [v3](https://v3.vuejs.org/guide/introduction.html)
 * Traversy Media, Vue JS Crash Course 2021 [tutorial](https://www.youtube.com/watch?v=qZXt1Aom3Cs)
 * The Net Ninja, [Vue.js 3 Tutorial for Beginners](https://www.youtube.com/playlist?list=PL4cUxeGkcC9hYYGbV60Vq3IXYNfDk8At1)
+* Vue Mastery [courses](https://www.vuemastery.com/courses/)
