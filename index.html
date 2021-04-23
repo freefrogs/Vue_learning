@@ -9,7 +9,8 @@
 <body>
   <div id="app">
     <Navbar></Navbar>
-    <Product></Product>
+    <Product @change-cart="updateCart"></Product>
+    <Cart :list="productsList"></Cart>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>

@@ -18,7 +18,7 @@ Vue.component('Product', {
       <div class="cart">
         <button @click="addToCart" :class="{disabled_button: inStock <= 0}" :disabled="inStock <= 0">Add to cart</button>
         <button @click="deleteFromCart" :class="{disabled_button: inStock <= 0}">Delete from cart</button>
-        <p class="cart_count">Products in cart: {{ cart }}</p>
+        <p class="cart_count">Product amount: {{ cart }}</p>
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@ Vue.component('Product', {
       color: 'orange',
       inStock: 8,
       details: ['Lorem ipsum dolor sit amet', 'consectetur adipiscing elit', 'sed do eiusmod tempor incididunt', 'ut labore et dolore magna aliqua'],
-      kinds: [{id: 1, color: 'orange', img: './assets/p1.jpg', stock: 8}, {id: 2, color: 'purple', img: './assets/p2.jpg', stock: 0}],
+      kinds: [{id: 1, color: 'orange', img: './assets/p1.jpg', stock: 8}, {id: 2, color: 'purple', img: './assets/p2.jpg', stock: 2}],
       cart: 0,
       }
   },
@@ -39,11 +39,13 @@ Vue.component('Product', {
       if (this.inStock > this.cart) {
         this.cart++
       }
+      this.$emit('change-cart', this.product, this.color, this.cart)
     },
     deleteFromCart() {
       if (this.cart>=1) {
         this.cart--
       }
+      this.$emit('change-cart', this.product, this.color, this.cart)
     },
     changeImage(type) {
       this.image = type.img
@@ -67,6 +69,43 @@ Vue.component('Navbar', {
     </div>
   `
 })
+Vue.component('Cart', {
+  template: `
+  <div class="globalCart">
+    <h2>Your Cart:</h2>
+    <ul>
+      <li v-for='p in list'>{{ p.product }}, amount: {{ p.cart }}</li>
+    </ul>
+  </div>
+  `,
+  props: {
+    list: Array,
+  }
+})
 const app = new Vue({
   el: '#app',
+  data() {
+    return {
+      productsList: [],
+    }
+  },
+  methods: {
+    updateCart(x,y,z) {
+      const newProduct = {product: `${x} ${y}`, cart: z}
+      const check = this.productsList.findIndex(item => item.product === `${x} ${y}`)
+      if (check === -1 && z === 0) {
+        return
+      }
+      if (check === -1) {
+        this.productsList = [...this.productsList, newProduct]
+      } else {
+        if (z === 0) {
+          console.log('hi')
+          this.productsList = [...this.productsList.slice(check+1, 1)]
+          return
+        }
+        this.productsList[check].cart = z
+      }
+    }
+  }
 })

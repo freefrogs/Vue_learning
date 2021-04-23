@@ -87,3 +87,7 @@ ul {
   padding: 10px;
   box-shadow: 0 0 10px var(--main_light);
 }
+.globalCart {
+  border: 1px solid var(--main_light);
+  padding: 10px;
+}
