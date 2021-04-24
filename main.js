@@ -21,16 +21,21 @@ Vue.component('Product', {
         <p class="cart_count">Product amount: {{ cart }}</p>
       </div>
     </div>
+    <Review @add-review="addReview"></Review>
+    <ReviewsBox :productKind="kinds[id-1].reviews"></ReviewsBox>
   </div>
   `,
   data() {
     return {
+      id: 1,
       product: 'Plant',
       image: './assets/p1.jpg',
       color: 'orange',
       inStock: 8,
       details: ['Lorem ipsum dolor sit amet', 'consectetur adipiscing elit', 'sed do eiusmod tempor incididunt', 'ut labore et dolore magna aliqua'],
-      kinds: [{id: 1, color: 'orange', img: './assets/p1.jpg', stock: 8}, {id: 2, color: 'purple', img: './assets/p2.jpg', stock: 2}],
+      kinds: [
+        {id: 1, color: 'orange', img: './assets/p1.jpg', stock: 8, reviews: [{user: 'Joe', desc: 'bla, bla, bla'}]},
+        {id: 2, color: 'purple', img: './assets/p2.jpg', stock: 2, reviews: []}],
       cart: 0,
       }
   },
@@ -51,10 +56,15 @@ Vue.component('Product', {
       this.image = type.img
       this.inStock = type.stock
       this.color = type.color
+      this.id = type.id
       if (this.inStock < this.cart) {
         this.cart = this.inStock
       }
-    }
+    },
+    addReview(u, d) {
+      const review = {user: u, desc: d}
+      this.kinds[this.id-1].reviews = [...this.kinds[this.id-1].reviews, review]
+    },
   },
   computed: {
     title() {
@@ -62,6 +72,7 @@ Vue.component('Product', {
     }
   }
 })
+
 Vue.component('Navbar', {
   template: `
     <div class="navbar">
@@ -69,6 +80,7 @@ Vue.component('Navbar', {
     </div>
   `
 })
+
 Vue.component('Cart', {
   template: `
   <div class="globalCart">
@@ -82,6 +94,63 @@ Vue.component('Cart', {
     list: Array,
   }
 })
+
+Vue.component('Review', {
+  template: `
+    <form class="review" @submit="addReview">
+      <h3>Add product review</h3>
+      <input class="form_item" type="text" v-model="user" placeholder="enter your name">
+      <p class="error" v-show="error_user">Your name should be 2 to 20 characters long</p>
+      <textarea class="form_item" row="4" v-model="desc" placeholder="enter your product review"></textarea>
+      <p class="error" v-show="error_desc">Your review should be 2 to 100 characters long</p>
+      <input class="btn" type="submit" value="Send" />
+    </form>
+  `,
+  data() {
+    return {
+      user: '',
+      desc: '',
+      error_user: false,
+      error_desc: false,
+    }
+  },
+  methods: {
+    addReview(e) {
+      e.preventDefault()
+      if (this.user <= 2 || this.user > 20) {
+        this.error_user = true
+        return
+      } else if (this.desc <= 2 || this.desc > 100) {
+        this.error_desc = true
+        return
+      }
+      this.$emit('add-review', this.user, this.desc)
+      this.user = ''
+      this.desc = ''
+      this.error_user = false
+      this.error_desc = false
+    }
+  }
+})
+
+Vue.component('ReviewsBox', {
+  template: `
+    <ul class="reviews_box">
+      <h3>Our clients reviews</h3>
+      <p v-if="!productKind.length">That product is waiting for review...</p>
+      <li class="review_item" v-for="r in productKind">
+        <p>{{r.desc}}</p>
+        <p class="review_user">{{r.user}}</p>
+      </li>
+    </ul>
+  `,
+  props: {
+    productKind: {
+      type: Array,
+    }
+  }
+})
+
 const app = new Vue({
   el: '#app',
   data() {

@@ -20,12 +20,12 @@ body {
   background-color: var(--main_dark);
   min-width: 350px;
 }
-a, button {
+a, button, .btn {
   text-decoration: none;
   color: var(--main_light);
   font-family: var(--main_font);
 }
-button {
+button, .btn {
   border: none;
   outline: none;
   background-color: var(--details);
@@ -36,7 +36,7 @@ button {
   cursor: pointer;
   transition: 0.3s;
 }
-button:hover {
+button:hover, .btn:hover {
   background-color: var(--neon);
 }
 .disabled_button, .disabled_button:hover {
@@ -90,4 +90,35 @@ ul {
 .globalCart {
   border: 1px solid var(--main_light);
   padding: 10px;
+}
+.review, .reviews_box {
+  background-color: var(--main_light);
+  margin: 20px;
+  border-radius: 20px;
+  padding: 20px;
+  color: var(--main_dark)
+}
+.review * {
+  display: block;
+  font-family: var(--main_font);
+  margin: 10px 0;
+}
+.form_item {
+  width: 100%;
+  padding: 10px;
+}
+.reviews_box {
+  list-style: none;
+}
+.review_item {
+  font-size: 0.9rem;
+  margin: 10px;
+  border-bottom: 1px solid var(--neon);
+}
+.review_user {
+  color: var(--details);
+  font-weight: bold;
+}
+.error {
+  color: red;
 }
