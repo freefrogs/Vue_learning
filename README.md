@@ -9,6 +9,7 @@ Learning Vue in 2021
 * NinjaBiggerProject - Vue.js (v3) practise with Net Ninja base on Vue CLI -> reusable component, slots, named slots, template refs, props, click event modifer, teleport component
 * introToVue2 - Vue.js (v2) basic with Vue Mastery, aplication base on cdn -> product card, interesting features: components, emit events, v-if, data, props, computed data, forms
 * introToRealWorldVue2 - Vue.js (v2) basic with Vue Mastery, aplication base on Vue CLI -> SPA event list app, interesting features: components, emit events, v-for, data, props, router with dynamic routing, global components, slot, fake server (json-server), fetching data service (axios)
+* UnitTestingVue2 - Vue.js (v2) basic with Vue Mastery, aplication base on Vue CLI -> practice testing with Jest & Vue Test Utils, tests: props & user interaction, emitted event, API calls
 
 ### Base on:
 * Vue guide [v2](https://vuejs.org/v2/guide/) & [v3](https://v3.vuejs.org/guide/introduction.html)
